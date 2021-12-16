@@ -11,6 +11,10 @@ namespace SkalProj_Datastrukturer_Minne
         static void Main()
         {
 
+
+
+
+
             while (true)
             {
                 Console.WriteLine("Please navigate through the menu by inputting the number \n(1, 2, 3 ,4, 0) of your choice"
@@ -72,12 +76,48 @@ namespace SkalProj_Datastrukturer_Minne
              * Below you can see some inspirational code to begin working.
             */
 
-            //List<string> theList = new List<string>();
-            //string input = Console.ReadLine();
-            //char nav = input[0];
-            //string value = input.substring(1);
+            List<string> theList = new List<string>();
 
-            //switch(nav){...}
+
+            Console.WriteLine($" Write before the text  '+'   if you want to add in the list or  '-'   to remove from the list or '0' to exit.");
+            do
+            {
+
+                string input = Console.ReadLine();
+
+                char nav = input[0];
+
+
+
+                string value = input.Substring(1);
+
+                switch (nav)
+                {
+                    case '+':
+                        theList.Add(value);
+                        break;
+                    case '-':
+                        theList.Remove(value);
+                        break;
+                    case '0':
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("some error occurs");
+                        break;
+                }
+
+
+
+                Console.WriteLine($"The list count { theList.Count} ");
+
+                Console.WriteLine($"The list capacity {theList.Capacity}");
+
+
+            } while (true);
+
+            // theList.Capacity kollar hur stor listan är
+            // theList.Count kollar hur många element som finns i listan
         }
 
         /// <summary>
@@ -90,6 +130,40 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to enqueue items or dequeue items
              * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
             */
+            Queue<string> theQueue = new Queue<string>();
+            Console.WriteLine($" Write before the text  '+'   if you want to add in the list or  '-'   to remove from the list or '0' to exit.");
+
+            do
+            {
+
+                string input = Console.ReadLine();
+                char nav = input[0];
+                string value = input.Substring(1);
+                switch (nav)
+                {
+                    case '+':
+                        theQueue.Enqueue(value);
+                        break;
+                    case '-':
+                        theQueue.Dequeue();
+                        break;
+                    case '0':
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("some error occur");
+                        break;
+                }
+
+                Console.WriteLine("\n...After Enqueue or Dequeue...\n");
+
+                foreach (string item in theQueue)
+                {
+                    Console.WriteLine(item);
+                }
+
+            } while (true);
+
         }
 
         /// <summary>
@@ -102,6 +176,38 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to push or pop items
              * Make sure to look at the stack after pushing and and poping to see how it behaves
             */
+            Stack<char> theStack = new Stack<char>();
+            Console.WriteLine($" Write before the text  '+'   if you want to add in the list or  '-'   to remove from the list or '0' to exit.");
+
+            while (true)
+            {
+
+                string text = Console.ReadLine();
+
+                char nav = text[0];
+
+                string value = text.Substring(1);
+
+                switch (nav)
+                {
+                    case '+':
+                        for (int i = 0; i < value.Length; i++) { theStack.Push(value[i]); }
+                        break;
+                    case '-':
+                        for (int i = theStack.Count; i > 0; i--) { Console.Write(theStack.Pop()); }
+                        Console.WriteLine();
+                        break;
+                    case '0':
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("Please enter some valid input (0, 1, 2, 3, 4)");
+                        break;
+
+                }
+
+            }
+
         }
 
         static void CheckParanthesis()
@@ -110,10 +216,69 @@ namespace SkalProj_Datastrukturer_Minne
              * Use this method to check if the paranthesis in a string is Correct or incorrect.
              * Example of correct: (()), {}, [({})],  List<int> list = new List<int>() { 1, 2, 3, 4 };
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
+
              */
+            Stack<char> theStack = new Stack<char>();
+            Console.WriteLine($" Write before the format after '+' or '0' to exit.");
+
+            while (true)
+            {
+                string text = Console.ReadLine();
+
+                char nav = text[0];
+
+                string value = text.Substring(1);
+
+                int x = value.Length / 2;
+                string inreverse = value.Substring(0, x);
+                string reverse = value.Substring(x);
+
+                switch (nav)
+                {
+                    case '+':
+                        for (int i = 0; i < inreverse.Length; i++)
+                        {
+                            switch (inreverse[i])
+                            {
+                                case '{':
+                                    theStack.Push('}');
+                                    break;
+                                case '<':
+                                    theStack.Push('>');
+                                    break;
+                                case '(':
+                                    theStack.Push(')');
+                                    break;
+                                case '[':
+                                    theStack.Push(']');
+                                    break;
+
+                            }
+                        }
+                        break;
+                    case '0':
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("Please enter some valid input (0, 1, 2, 3, 4)");
+                        break;
+
+                }
+                string str = new string(theStack.ToArray());
+               
+                if (str == reverse)
+                {
+                    Console.WriteLine("Correct format");
+                }
+                else
+                {
+                    Console.WriteLine("Wrong format");
+                }
+
+                theStack.Clear();
+            }
 
         }
-
     }
 }
 
