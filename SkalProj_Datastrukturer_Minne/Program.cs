@@ -22,6 +22,7 @@ namespace SkalProj_Datastrukturer_Minne
                     + "\n2. Examine a Queue"
                     + "\n3. Examine a Stack"
                     + "\n4. CheckParanthesis"
+                    + "\n5. CheckAllAlphabets"
                     + "\n0. Exit the application");
                 char input = ' '; //Creates the character input to be used with the switch-case below.
                 try
@@ -47,6 +48,9 @@ namespace SkalProj_Datastrukturer_Minne
                     case '4':
                         CheckParanthesis();
                         break;
+                    case '5':
+                        ChecAllAlphabets();
+                        break;
                     /*
                      * Extend the menu to include the recursive 
                      * and iterative exercises.
@@ -60,6 +64,8 @@ namespace SkalProj_Datastrukturer_Minne
                 }
             }
         }
+
+       
 
         /// <summary>
         /// Examines the datastructure List
@@ -277,6 +283,42 @@ namespace SkalProj_Datastrukturer_Minne
 
                 theStack.Clear();
             }
+
+        }
+        private static void ChecAllAlphabets()
+        {
+            string allAlphabets = "abcdefghijklmnopqrstuvwxyz";
+
+            bool checkTrue = true;
+
+            List<char> checkAlphabet = new List<char>();
+
+            Console.WriteLine("Enter the text to be Checked.");
+
+            string input = Console.ReadLine();
+
+            for(int i = 0; i < input.Length; i++)
+            {
+                checkAlphabet.Add(input[i]);
+            }
+
+            
+
+            for(int i = 0; i < allAlphabets.Length; i++)
+            {
+               
+                
+                if (!(checkAlphabet.Contains(allAlphabets[i])))
+                {
+                    Console.WriteLine("Not all alphets are contained");
+                    checkTrue = false;
+                    break;
+                        
+                }
+               
+            }
+
+            if (checkTrue) { Console.WriteLine("All the alphabets are contained in the text you entered"); }
 
         }
     }
